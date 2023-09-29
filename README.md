@@ -4,7 +4,7 @@ I just have noticed how poor of a state Adonis upstream is, it is a nearly unusa
 
 The following features are either planned or are in development in a branch to be merged upstream: 
 
-- [x] [bug/fix-linting](https://github.com/moo1210/Adonis/tree/bug/fix-adonis-state-2023) Originally intended to just fix linting, this branch now adds a swift full of changes to help fix bugs, such as adding stack traces to error logs, and fixes the linter, as well as fixes a many different bugs too. ([Draft PR submitted](https://github.com/Epix-Incorporated/Adonis/pull/1216))
+- [x] [bug/fix-adonis-state-2023](https://github.com/moo1210/Adonis/tree/bug/fix-adonis-state-2023) Originally intended to just fix linting, this branch now adds a swift full of changes to help fix bugs, such as adding stack traces to error logs, and fixes the linter, as well as fixes a many different bugs too. ([Draft PR submitted](https://github.com/Epix-Incorporated/Adonis/pull/1216))
 - [ ] [feat/improve-adonis-ui-ux-2023](https://github.com/moo1210/Adonis/tree/feat/improve-adonis-ui-ux-2023) Make Core UI elements (such as Window) work better with Gamepads, Consoles, and in VR, on the classic theme. Other cross-platform stuff such as scaling, and other changes. Fix changes made within the last year that harm UX for no reason. See https://github.com/moo1210/Adonis/issues/1 for more details.
 
 The following features are currently developed within this downstream fork and don't intend to be merged upstream, mainly due to Adonis's current state.
