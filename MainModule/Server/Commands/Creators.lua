@@ -107,34 +107,6 @@ return function(Vargs, env)
 			end;
 		};
 
-		ForcePlace = {
-			Prefix = Settings.Prefix;
-			Commands = {"forceplace"};
-			Args = {"player", "placeId/serverName"};
-			Description = "Force the target player(s) to teleport to the desired place";
-			NoStudio = true;
-			AdminLevel = "Creators";
-			Function = function(plr: Player, args: {string})
-				local reservedServerInfo = (Core.GetData("PrivateServers") or {})[args[2]]
-				local placeId = assert(if reservedServerInfo then reservedServerInfo.ID else tonumber(args[2]), "Invalid place ID or server name (argument #2)")
-				local players = service.GetPlayers(plr, args[1])
-				local teleportOptions = if reservedServerInfo then service.New("TeleportOptions", {
-					ReservedServerAccessCode = reservedServerInfo.Code
-				}) else nil
-
-				local teleportValidation = service.TeleportService.TeleportInitFailed:Connect(function(p: Player, teleportResult: Enum.TeleportResult, errorMessage: string)
-					Functions.Hint(string.format("Failed to teleport %s: [%s] %s", service.FormatPlayer(p), teleportResult.Name, errorMessage or "???"), {plr})
-				end)
-				local success, fault = pcall(service.TeleportService.TeleportAsync, service.TeleportService, placeId, players, teleportOptions)
-				teleportValidation:Disconnect()
-				if success and plr and plr.Parent == service.Players then
-					Functions.Hint("Teleport success", {plr})
-				elseif not success then
-					error(fault)
-				end
-			end
-		};
-
 		GivePlayerPoints = { --// obsolete since ROBLOX discontinued player points
 			Prefix = Settings.Prefix;
 			Commands = {"giveppoints", "giveplayerpoints", "sendplayerpoints"};
