@@ -2457,19 +2457,6 @@ return function(Vargs, env)
 			end
 		};
 
-		Sell = {
-			Prefix = Settings.Prefix;
-			Commands = {"sell", "promptpurchase"};
-			Args = {"player", "id"};
-			Description = "Prompts the player(s) to buy the product belonging to the ID you supply";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				for _, v in service.GetPlayers(plr, args[1]) do
-					service.MarketPlace:PromptPurchase(v, tonumber(args[2]), false)
-				end
-			end
-		};
-
 		Capes = {
 			Prefix = Settings.Prefix;
 			Commands = {"capes", "capelist"};
