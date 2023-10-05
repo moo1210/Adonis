@@ -4790,6 +4790,10 @@ return function(Vargs, env)
 			Description = "Teleports the target player(s) to your position";
 			AdminLevel = "Moderators";
 			Function = function(plr: Player, args: {string})
+				if not args[1] then
+					args[1] = "me" -- This restores functionality to :bring without arguments defaulting as yourself, which is how the command used to behave before a update.
+				end
+				
 				local players = service.GetPlayers(plr, assert(args[1], "Missing target player (argument #1)"))
 				if #players < 10 or not Commands.MassBring or Remote.GetGui(plr, "YesNoPrompt", {
 					Title = "Suggestion";
