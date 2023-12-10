@@ -25,7 +25,7 @@ do
 
 	local proxyDetector = newproxy(true)
 
-	do
+	while Settings.Detection and Settings.AllowClientAntiExploit do
 		local proxyMt = getmetatable(proxyDetector)
 
 		proxyMt.__index = function()
