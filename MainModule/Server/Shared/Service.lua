@@ -70,6 +70,7 @@ return function(errorHandler, eventChecker, fenceSpecific, env)
 
 	local service;
 	local passOwnershipCache = {}
+	local subOwnershipCache = {}
 	local assetOwnershipCache = {}
 	local assetInfoCache = {}
 	local groupInfoCache = {}
@@ -1106,6 +1107,37 @@ return function(errorHandler, eventChecker, fenceSpecific, env)
 				end
 			elseif currentCache then
 				return currentCache.owned
+			end
+		end;
+
+		CheckSubscriptionOwnership = function(userId, subscriptionId)
+			userId = if type(userId) == "userdata" then userId.UserId else tonumber(userId)
+
+			local cacheIndex = `{userId}-{subscriptionId}`
+			local currentCache = subOwnershipCache[cacheIndex]
+
+			if currentCache and currentCache.subscribed then
+				return true
+			elseif (currentCache and (os.time()-currentCache.lastUpdated > 60)) or not currentCache then
+				local cacheTab = {
+					subscribed = (currentCache and currentCache.subscribed) or false;
+					lastUpdated = os.time();
+				}
+				local subTab
+				subOwnershipCache[cacheIndex] = cacheTab
+
+				local suc, ers = pcall(function()
+					subTab = service.MarketplaceService:GetUserSubscriptionStatusAsync(userId, subscriptionId)
+				end)
+
+				if suc and subTab.IsSubscribed then
+					cacheTab.subscribed = subTab.IsSubscribed
+					return cacheTab.subscribed
+				else
+					return cacheTab.subscribed
+				end
+			elseif currentCache then
+				return currentCache.subscribed
 			end
 		end;
 

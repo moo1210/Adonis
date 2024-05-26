@@ -2496,6 +2496,19 @@ return function(Vargs, env)
 			end
 		};
 
+		SellSubscription = {
+			Prefix = Settings.Prefix;
+			Commands = {"sellsubscription", "promptsubscription"};
+			Args = {"player", "EXP-X"};
+			Description = "Prompts the player(s) to buy the subscription belonging to the ID you supply";
+			AdminLevel = "Moderators";
+			Function = function(plr: Player, args: {string})
+				for _, v in service.GetPlayers(plr, args[1]) do
+					service.MarketPlace:PromptSubscriptionPurchase(v, tostring(args[2]))
+				end
+			end
+		};
+
 		Capes = {
 			Prefix = Settings.Prefix;
 			Commands = {"capes", "capelist"};
