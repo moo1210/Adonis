@@ -159,7 +159,7 @@ return function(Vargs, GetEnv)
 
 			for i,v in newEnv.client do
 				if type(v) == "table" and i ~= "Variables" and i ~= "Handlers" then
-					newEnv.client[i] = CloneTable(v)
+					newEnv.client[i] = v
 				end
 			end
 
@@ -478,9 +478,7 @@ return function(Vargs, GetEnv)
 					local disc = function()
 						origDisc(signal)
 						for i,v in Events do
-							if v.Signal == signal then
-								table.remove(Events, i)
-							end
+							table.remove(Events, i)
 						end
 					end
 
@@ -500,6 +498,7 @@ return function(Vargs, GetEnv)
 					for i,v in gTable.Events do
 						v:Remove()
 					end
+					gTable.UnRegister()
 				end,
 
 				Destroy = function()
