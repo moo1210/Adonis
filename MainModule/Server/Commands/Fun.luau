@@ -1387,7 +1387,7 @@ return function(Vargs, env)
 				local img = tostring(args[2])
 				if not img then error(`{args[2]} is not a valid ID`) end
 				for i, v in service.GetPlayers(plr, args[1]) do
-					Remote.MakeGui(v, "Effect", {Mode = "ScreenVideo"; video = args[2];})
+					Remote.MakeGui(v, "Effect", {Mode = "ScreenVideo"; Video = args[2];})
 				end
 			end
 		};
@@ -2724,7 +2724,7 @@ return function(Vargs, env)
 									local lc0 = service.New("CFrameValue", {Name = "LastC0";Value = v.C0;Parent = v})
 								end
 							end
-							
+
 							for _, v in lowertorso:GetChildren() do
 								if v:IsA("Motor6D") then
 									local lc0 = service.New("CFrameValue", {Name = "LastC0";Value = v.C0;Parent = v})
